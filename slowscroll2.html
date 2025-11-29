@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Insta-Grayscale Dummy App</title>
-    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <title>Insta-Scroll Dummy App</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Custom scrollbar to make the content visible */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #fafafa;
-            transition: filter 10s ease-in-out; /* Smooth transition for grayscale */
         }
-        body.grayscale-active {
-            filter: grayscale(100%);
-        }
-
         /* Hide default scrollbar for aesthetics, but keep scrolling functional */
         .feed-container::-webkit-scrollbar {
             display: none;
@@ -24,7 +20,7 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
-        /* Smooth scrolling for the auto-scroll effect (though not used now, good to keep) */
+        /* Smooth scrolling for the auto-scroll effect */
         html {
             scroll-behavior: smooth;
         }
@@ -35,7 +31,7 @@
             height: 40px; /* Increased size */
             border-radius: 50%;
             /* Initial state: 0% filled (gray) - Orange is #f97316 */
-            background: conic-gradient(#f97316 0% 0%, #d1d5db 0% 100%);
+            background: conic-gradient(#779bf0 0% 0%, #d1d5db 0% 100%);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -45,46 +41,60 @@
             transition: background 1s linear;
         }
         .progress-ring.finished {
-            background: #f97316; /* Solid orange when finished */
+            background: #779bf0; /* Solid orange when finished */
             color: white;
         }
+
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- Header / Navbar --><header class="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-10 bg-white border-b border-gray-200 shadow-sm">
         <div class="max-w-xl mx-auto flex justify-between items-center h-16 px-4">
             <h1 class="text-2xl font-semibold font-serif italic">InstaClone</h1>
             <div class="flex items-center space-x-4 text-gray-700">
-                <!-- Circular Clock/Progress Element --><div id="time-progress-ring" class="progress-ring border-2 border-gray-300 shadow-inner">
+                <!-- New Circular Clock/Progress Element (NOW ON THE RIGHT) -->
+                <div id="time-progress-ring" class="progress-ring border-2 border-gray-300 shadow-inner">
                     <span id="elapsed-time">0</span>
                 </div>
-                <!-- Dummy Icons --><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
+                <!-- Stop Button (hidden until scrolling starts) -->
+                <button id="stop-scroll-btn" onclick="stopAutoScroll()" class="text-sm px-3 py-1 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-full shadow-md hidden">STOP</button>
+                <!-- Dummy Icons -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 6V5a2 2 0 00-2-2H7a2 2 0 00-2 2v9m14 0a2 2 0 01-2 2H7a2 2 0 01-2-2m14 0v4a2 2 0 01-2 2H7a2 2 0 01-2-2v-4" /></svg>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Feed --><main class="max-w-xl mx-auto pt-4 pb-8 feed-container">
+    <!-- Main Content Feed -->
+    <!-- Removed status bar element here -->
+    <main class="max-w-xl mx-auto pt-4 pb-8 feed-container">
         
-        <!-- Post 1 --><div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
-            <!-- Post Header --><div class="flex items-center p-3">
+        <!-- Post 1 -->
+        <div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
+            <!-- Post Header -->
+            <div class="flex items-center p-3">
                 <div class="w-8 h-8 rounded-full bg-blue-400 mr-3"></div>
                 <span class="font-semibold text-sm">explorer_gemini</span>
             </div>
-            <!-- Post Image --><img class="w-full h-80 object-cover" src="https://placehold.co/600x450/3b82f6/ffffff?text=Mountain+View" alt="Placeholder image of a scenic view" onerror="this.onerror=null;this.src='https://placehold.co/600x450/3b82f6/ffffff?text=Image+Load+Error';" />
-            <!-- Post Actions --><div class="flex space-x-4 p-3 text-gray-700">
+            <!-- Post Image -->
+            <img class="w-full h-80 object-cover" src="https://placehold.co/600x450/3b82f6/ffffff?text=Mountain+View" alt="Placeholder image of a scenic view" onerror="this.onerror=null;this.src='https://placehold.co/600x450/3b82f6/ffffff?text=Image+Load+Error';" />
+            <!-- Post Actions -->
+            <div class="flex space-x-4 p-3 text-gray-700">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                <svg xmlns="http://www.w3.2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.805A9.73 9.73 0 0112 12z" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.805A9.73 9.73 0 0112 12z" /></svg>
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
             </div>
-            <!-- Post Caption --><div class="p-3 pt-0 text-sm">
+            <!-- Post Caption -->
+            <div class="p-3 pt-0 text-sm">
                 <p><span class="font-semibold">explorer_gemini</span> The mountains were calling, and I had to go! What an incredible day hiking and exploring. #adventure #hiking #nature</p>
                 <p class="text-gray-500 mt-1 text-xs">View all 1,234 comments</p>
             </div>
         </div>
 
-        <!-- Post 2 --><div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
+        <!-- Post 2 -->
+        <div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
             <div class="flex items-center p-3">
                 <div class="w-8 h-8 rounded-full bg-pink-400 mr-3"></div>
                 <span class="font-semibold text-sm">ai_designer</span>
@@ -101,7 +111,8 @@
             </div>
         </div>
 
-        <!-- Post 3 (Extra Long Post) --><div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
+        <!-- Post 3 (Extra Long Post) -->
+        <div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
             <div class="flex items-center p-3">
                 <div class="w-8 h-8 rounded-full bg-green-400 mr-3"></div>
                 <span class="font-semibold text-sm">code_master_42</span>
@@ -118,26 +129,8 @@
             </div>
         </div>
 
-        <!-- Post 4 --><div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
-            <div class="flex items-center p-3">
-                <div class="w-8 h-8 rounded-full bg-red-400 mr-3"></div>
-                <span class="font-semibold text-sm">foodie_delights</span>
-            </div>
-            <img class="w-full h-80 object-cover" src="download (2).jpg" alt="Placeholder image of food" onerror="this.onerror=null;this.src='https://placehold.co/600x550/ef4444/ffffff?text=Image+Load+Error';" />
-            <div class="flex space-x-4 p-3 text-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.805A9.73 9.73 0 0112 12z" /></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" /></svg>
-            </div>
-            <div class="p-3 pt-0 text-sm">
-                <p><span class="font-semibold">foodie_delights</span> Taco Tuesday is a lifestyle, not just a day of the week. Swipe for the cheese pull! 🤤 #tacos #foodie #dinner</p>
-                <p class="text-gray-500 mt-1 text-xs">View all 502 comments</p>
-            </div>
-        </div>
-
-        
-
-         <!-- Post 4 --><div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
+        <!-- Post 4 -->
+        <div class="bg-white rounded-xl shadow-md mb-8 border border-gray-200">
             <div class="flex items-center p-3">
                 <div class="w-8 h-8 rounded-full bg-red-400 mr-3"></div>
                 <span class="font-semibold text-sm">foodie_delights</span>
@@ -315,70 +308,100 @@
                 <p class="text-gray-500 mt-1 text-xs">View all 234 comments</p>
             </div>
         </div>
+
+
+
 
         <!-- Filler space to ensure enough content for scrolling -->
         <div class="h-96"></div>
         <div class="text-center text-gray-400 p-4">End of Feed - Check back later!</div>
-
-    
-
-        <!-- Filler space to ensure enough content for scrolling --><div class="h-96"></div>
-        <div class="text-center text-gray-400 p-4">End of Feed - Check back later!</div>
     </main>
+<script>
+    const delayTime = 60 * 1000; 
+    const progressRing = document.getElementById('time-progress-ring');
+    const elapsedTimeEl = document.getElementById('elapsed-time');
+    const totalTime = delayTime / 1000;
+    let countdownTimer;
+    let timePassed = 0;
 
-    <script>
-        const delayTime = 60 * 1000; // 60 seconds in milliseconds
-        
-        // Timer Elements
-        const progressRing = document.getElementById('time-progress-ring');
-        const elapsedTimeEl = document.getElementById('elapsed-time');
-        const bodyElement = document.body;
+    /* === SLOW SCROLL VARIABLES (only active after 60s) === */
+    let slowScrollEnabled = false; 
+    let targetScrollY = window.scrollY;
+    let isScrolling = false;
 
-        // State Variables
-        const totalTime = delayTime / 1000; // 60 seconds
-        let countdownTimer;
-        let timePassed = 0; // Clock count up
+    // Speed of the slow scroll (smaller = slower)
+    const slowScrollSpeed = 0.15; 
 
-        /**
-         * Applies the grayscale filter to the body.
-         */
-        function applyGrayscale() {
-            bodyElement.classList.add('grayscale-active');
-            console.log('Grayscale effect applied after 60 seconds.');
+    function animateScroll() {
+        if (!isScrolling) return;
+
+        const current = window.scrollY;
+        const diff = targetScrollY - current;
+
+        if (Math.abs(diff) < 0.5) {
+            isScrolling = false;
+            return;
         }
 
-        /**
-         * Handles the visual circular clock update.
-         */
-        function startCountdown() {
-            countdownTimer = setInterval(() => {
-                timePassed++;
+        window.scrollTo(0, current + diff * slowScrollSpeed);
+        requestAnimationFrame(animateScroll);
+    }
 
-                if (timePassed <= totalTime) {
-                    // 1. Update the elapsed time display (0 to 60)
-                    elapsedTimeEl.textContent = timePassed;
-
-                    // 2. Calculate progress percentage (0 to 100)
-                    const percentage = (timePassed / totalTime) * 100;
-                    
-                    // 3. Update the conic gradient background for the circular progress visual
-                    // Orange: #f97316
-                    progressRing.style.background = `conic-gradient(#f97316 ${percentage}%, #d1d5db ${percentage}% 100%)`;
-                }
-
-                // When time is up, update the clock's final state and apply grayscale
-                if (timePassed === totalTime) {
-                    clearInterval(countdownTimer);
-                    elapsedTimeEl.innerHTML = '<span class="text-white text-xl">✔</span>'; // Bigger check mark
-                    progressRing.classList.add('finished');
-                    applyGrayscale(); // Apply the grayscale effect
-                }
-
-            }, 1000); // Update every second
+    // HUMAN SCROLL EVENT
+    window.addEventListener('wheel', (event) => {
+        if (!slowScrollEnabled) {
+            // Before 60s → normal scroll
+            return;
         }
 
-        // Start the visual countdown immediately on load
-        startCountdown();
-    </script>
+        // After 60s → slow scroll
+        event.preventDefault();
+
+        targetScrollY += event.deltaY;
+
+        // clamp to bounds
+        targetScrollY = Math.max(
+            0,
+            Math.min(targetScrollY, document.body.scrollHeight - window.innerHeight)
+        );
+
+        if (!isScrolling) {
+            isScrolling = true;
+            requestAnimationFrame(animateScroll);
+        }
+    }, { passive: false });
+
+
+    /* === COUNTDOWN LOGIC === */
+    function startCountdown() {
+        countdownTimer = setInterval(() => {
+            timePassed++;
+
+            if (timePassed <= totalTime) {
+                elapsedTimeEl.textContent = timePassed;
+                const percentage = (timePassed / totalTime) * 100;
+                progressRing.style.background = 
+                    `conic-gradient(#779bf0 ${percentage}%, #d1d5db ${percentage}% 100%)`;
+            }
+
+            // When timer finishes → enable slow scroll
+            if (timePassed === totalTime) {
+                clearInterval(countdownTimer);
+
+                elapsedTimeEl.innerHTML = '<span class="text-white text-xl">✔</span>';
+                progressRing.classList.add('finished');
+
+                slowScrollEnabled = true;   // 🔥 Enable slow scrolling mode
+                console.log("60 seconds passed → slow scrolling enabled.");
+                //sjs
+            }
+
+        }, 1000);
+    }
+
+    startCountdown();
+</script>
+
+
 </body>
 </html>
